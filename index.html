@@ -185,7 +185,7 @@
                         <!-- Right Column -->
                         <div class="lg:col-span-3 space-y-6">
                              <div class="bg-gray-900 rounded-lg p-4">
-                                 <h4 class="font-bold text-lg mb-3 text-blue-300">Global Risk Timeline</h4>
+                                 <h4 class="font-bold text-lg mb-3 text-blue-300">Cyberstylometry Risk Timeline</h4>
                                  <div class="relative h-48 flex items-end p-2 pr-4 pl-8">
                                     <span class="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 text-sm text-gray-400 origin-center whitespace-nowrap">Risk Level</span>
                                     <svg id="risk-timeline-svg" class="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
@@ -344,8 +344,9 @@
                     <h3 class="text-2xl font-bold text-emerald-400 mb-4">1. Enter the suspicious message</h3>
                     <textarea id="guardian-input" class="w-full h-32 bg-gray-800 border border-gray-600 rounded-lg p-4 text-lg" placeholder="Type or paste the message here..."></textarea>
                     <div class="flex items-center space-x-4 mt-4">
-                        <button id="speak-demo-btn" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg">
-                            Speak (Demo)
+                        <button id="speak-demo-btn" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line></svg>
+                            <span>Speak (Demo)</span>
                         </button>
                         <p class="text-gray-400">or</p>
                         <button id="analyze-btn" class="bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-2 px-4 rounded-lg">
@@ -709,7 +710,10 @@
             }
             if(cgBlockReportBtn && !cgBlockReportBtn.dataset.initialized) {
                 cgBlockReportBtn.dataset.initialized = true;
-                cgBlockReportBtn.addEventListener('click', () => showToast('Sender has been blocked and reported.', 'success'));
+                cgBlockReportBtn.addEventListener('click', () => {
+                    window.open('https://cybercrime.gov.in/', '_blank');
+                    showToast('Redirecting to Cyber Crime Portal...', 'info');
+                });
             }
         }
 
@@ -719,5 +723,4 @@
     </script>
 </body>
 </html>
-
 
