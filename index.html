@@ -93,6 +93,11 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 0 15px var(--primary-glow-soft);
         }
+        /* CyberGuardian specific styles */
+        .lang-btn.active {
+            background-color: var(--primary-color);
+            color: black;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -105,7 +110,7 @@
                 <a href="#technology" class="nav-link">Technology</a>
                 <a href="#metrics" class="nav-link">Metrics</a>
                 <a href="#benefits" class="nav-link">Benefits</a>
-                <a href="https://manyaaaa28.github.io/temp/" target="_blank" rel="noopener noreferrer" class="nav-link">CyberGuardian</a>
+                <a href="#cyberguardian" class="nav-link">CyberGuardian</a>
             </div>
         </div>
     </nav>
@@ -180,7 +185,7 @@
                         <!-- Right Column -->
                         <div class="lg:col-span-3 space-y-6">
                              <div class="bg-gray-900 rounded-lg p-4">
-                                 <h4 class="font-bold text-lg mb-3 text-blue-300">Global Risk Timeline</h4>
+                                 <h4 class="font-bold text-lg mb-3 text-blue-300">Cyberstylometry Risk Timeline</h4>
                                  <div class="relative h-48 flex items-end p-2 pr-4 pl-8">
                                     <span class="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 text-sm text-gray-400 origin-center whitespace-nowrap">Risk Level</span>
                                     <svg id="risk-timeline-svg" class="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
@@ -328,6 +333,51 @@
 
              </div>
         </section>
+
+        <!-- CyberGuardian Page -->
+        <section id="cyberguardian" class="page py-24 pt-32 min-h-screen">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-center mb-8">CyberGuardian</h2>
+                <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-16">Your Personal Safety Assistant. Received a confusing message? Let us check it for you.</p>
+
+                <div class="max-w-3xl mx-auto bg-gray-900 border border-gray-700 rounded-lg p-8">
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-4">1. Enter the suspicious message</h3>
+                    <textarea id="guardian-input" class="w-full h-32 bg-gray-800 border border-gray-600 rounded-lg p-4 text-lg" placeholder="Type or paste the message here..."></textarea>
+                    <div class="flex items-center space-x-4 mt-4">
+                        <button id="speak-demo-btn" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg">
+                            Speak (Demo)
+                        </button>
+                        <p class="text-gray-400">or</p>
+                        <button id="analyze-btn" class="bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-2 px-4 rounded-lg">
+                           Analyze Message
+                        </button>
+                    </div>
+
+                    <div id="guardian-alert-box" class="mt-10 border-t border-gray-700 pt-8" style="display: none;">
+                        <h3 class="text-2xl font-bold text-red-500 mb-4">2. This is a Scam! Here's what it means:</h3>
+                        
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-gray-400">Read in:</span>
+                            <button data-lang="en" class="lang-btn active bg-gray-700 text-white font-bold py-1 px-3 rounded-lg text-sm">English</button>
+                            <button data-lang="hi" class="lang-btn bg-gray-700 text-white font-bold py-1 px-3 rounded-lg text-sm">Hindi</button>
+                            <button data-lang="ta" class="lang-btn bg-gray-700 text-white font-bold py-1 px-3 rounded-lg text-sm">Tamil</button>
+                        </div>
+
+                        <div id="explanation-box" class="bg-gray-800 p-6 rounded-lg text-xl leading-relaxed">
+                            <p class="lang-text" data-lang="en">This message is trying to scare you. It is a trick. Real banks will never ask you to click a link like this in a text message. <strong>Do not click the link.</strong> It is not safe.</p>
+                            <p class="lang-text" data-lang="hi" style="display: none;">यह संदेश आपको डराने की कोशिश कर रहा है। यह एक चाल है। असली बैंक कभी भी आपको टेक्स्ट संदेश में इस तरह के लिंक पर क्लिक करने के लिए नहीं कहेंगे। <strong>लिंक पर क्लिक न करें।</strong> यह सुरक्षित नहीं है।</p>
+                            <p class="lang-text" data-lang="ta" style="display: none;">இந்தச் செய்தி உங்களைப் பயமுறுத்த முயற்சிக்கிறது. இது ஒரு தந்திரம். உண்மையான வங்கிகள் ஒருபோதும் குறுஞ்செய்தியில் இதுபோன்ற இணைப்பைக் கிளிக் செய்யச் சொல்லாது. <strong>இணைப்பைக் கிளிக் செய்ய வேண்டாம்.</strong> அது பாதுகாப்பானது அல்ல.</p>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-emerald-400 mt-8 mb-4">3. What should you do now?</h3>
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                             <button id="cg-quarantine-btn" class="bg-yellow-500 text-black text-lg w-full font-bold py-3 px-6 rounded-lg hover:bg-yellow-400 transition-colors">Quarantine Message</button>
+                             <button id="cg-block-report-btn" class="bg-red-600 text-white text-lg w-full font-bold py-3 px-6 rounded-lg hover:bg-red-500 transition-colors">Block & Report Sender</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-3"></div>
@@ -365,11 +415,15 @@
                         if(pageId === 'dashboard') initDashboardAnims();
                         if(pageId === 'home') initHomeAnims();
                         if(pageId === 'metrics') initMetricsAnims();
+                        if(pageId === 'cyberguardian') initGuardianAnims();
                     }
                 }
             });
 
             navLinks.forEach(link => {
+                // Handle external links gracefully
+                if (link.target === '_blank') return;
+                
                 if (link.getAttribute('href') === `#${pageId}`) {
                     link.classList.add('active');
                 } else {
@@ -379,11 +433,14 @@
         }
 
         navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const pageId = e.target.getAttribute('href').substring(1);
-                showPage(pageId);
-            });
+            // Prevent default only for internal links
+            if (link.target !== '_blank') {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = e.target.getAttribute('href').substring(1);
+                    showPage(pageId);
+                });
+            }
         });
 
         homeLink.addEventListener('click', (e) => {
@@ -587,7 +644,7 @@
                     duration: 2,
                     ease: "power2.out",
                     onUpdate: () => {
-                        document.getElementById(id).textContent = Math.floor(obj.val).toLocaleString('en-US') + suffix;
+                        document.getElementById(id).textContent = Math.round(obj.val).toLocaleString('en-US') + suffix;
                     }
                 });
             }
@@ -597,13 +654,69 @@
             animateKPI('kpi-languages', 12);
         }
 
+        function initGuardianAnims() {
+            const speakDemoBtn = document.getElementById('speak-demo-btn');
+            const analyzeBtn = document.getElementById('analyze-btn');
+            const guardianInput = document.getElementById('guardian-input');
+            const alertBox = document.getElementById('guardian-alert-box');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const langTexts = document.querySelectorAll('.lang-text');
+            const cgQuarantineBtn = document.getElementById('cg-quarantine-btn');
+            const cgBlockReportBtn = document.getElementById('cg-block-report-btn');
+
+            if (speakDemoBtn && !speakDemoBtn.dataset.initialized) {
+                speakDemoBtn.dataset.initialized = true;
+                speakDemoBtn.addEventListener('click', () => {
+                    guardianInput.value = "URGENT! Your bank account has been compromised. Click this link immediately to secure your account: http://secure-update-bank.info";
+                    showToast("Simulating voice input...", 'info');
+                });
+            }
+
+            if (analyzeBtn && !analyzeBtn.dataset.initialized) {
+                analyzeBtn.dataset.initialized = true;
+                analyzeBtn.addEventListener('click', () => {
+                    if (guardianInput.value.trim() !== '') {
+                        alertBox.style.display = 'block';
+                        gsap.from(alertBox, { opacity: 0, y: 20, duration: 0.5 });
+                    } else {
+                        showToast("Please enter a message to analyze.", 'warning');
+                    }
+                });
+            }
+            
+            langButtons.forEach(btn => {
+                if (!btn.dataset.initialized) {
+                    btn.dataset.initialized = true;
+                    btn.addEventListener('click', () => {
+                        const selectedLang = btn.dataset.lang;
+                        langButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        langTexts.forEach(text => {
+                            if (text.dataset.lang === selectedLang) {
+                                text.style.display = 'block';
+                            } else {
+                                text.style.display = 'none';
+                            }
+                        });
+                    });
+                }
+            });
+
+            if(cgQuarantineBtn && !cgQuarantineBtn.dataset.initialized) {
+                cgQuarantineBtn.dataset.initialized = true;
+                cgQuarantineBtn.addEventListener('click', () => showToast('Message has been moved to a safe folder.', 'success'));
+            }
+            if(cgBlockReportBtn && !cgBlockReportBtn.dataset.initialized) {
+                cgBlockReportBtn.dataset.initialized = true;
+                cgBlockReportBtn.addEventListener('click', () => showToast('Sender has been blocked and reported.', 'success'));
+            }
+        }
+
         // Initial load
         showPage('home');
     });
     </script>
 </body>
 </html>
-
-
-
 
