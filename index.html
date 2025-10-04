@@ -3,724 +3,544 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyberstylometry - Proactive Threat Prediction</title>
+    <title>Nandinee — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --primary-glow: rgba(52, 211, 153, 0.7);
-            --primary-glow-soft: rgba(52, 211, 153, 0.3);
-            --primary-color: #34d399;
-            --secondary-color: #60a5fa;
-            --danger-color: #ef4444;
-            --warning-color: #f59e0b;
-        }
+        /* Custom Styles */
         body {
+            background-color: #0A0A0A;
+            color: #EAEAEA;
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: #e5e7eb;
             overflow-x: hidden;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
-        .cyber-glow {
-            text-shadow: 0 0 5px var(--primary-glow), 0 0 10px var(--primary-glow-soft), 0 0 15px var(--primary-glow-soft);
+
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, and Opera */
         }
-        .hero-canvas {
+
+        .font-display {
+            font-family: 'Bai Jamjuree', sans-serif;
+        }
+        
+        .accent-blue {
+            color: #007CF0;
+        }
+
+        .panel {
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: #0A0A0A; /* Fix for overlapping content */
+        }
+
+        /* Shimmer effect for name */
+        .name-container {
+            position: relative;
+        }
+        .name-text {
+            transition: transform 0.3s ease;
+        }
+        .name-text .char {
+            display: inline-block;
+        }
+        .name-container:hover .name-text {
+            transform: scale(1.05);
+        }
+        .shimmer .char {
+            background: linear-gradient(90deg, #EAEAEA 20%, #888 50%, #EAEAEA 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer-animation 3s infinite linear;
+            background-size: 400% 100%;
+        }
+
+        @keyframes shimmer-animation {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            width: 80%;
+            position: relative;
+        }
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%);
+        }
+        .timeline-line-progress {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 0%;
             height: 100%;
-            z-index: 0;
+            background-color: #007CF0;
         }
-        .section-title {
-            font-weight: 900;
-            font-size: 3rem;
-            line-height: 1.1;
-            background: -webkit-linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        @media (max-width: 768px) { .section-title { font-size: 2.5rem; } }
-        
-        /* Page Navigation Styling */
-        nav .nav-link {
+        .timeline-node {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 9999px;
+            background-color: #0A0A0A;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             position: relative;
-            transition: color 0.3s;
+            z-index: 10;
+            transition: all 0.3s ease;
         }
-        nav .nav-link::after {
-            content: '';
+        .timeline-node.active {
+            background-color: #007CF0;
+            border-color: #007CF0;
+            transform: scale(1.2);
+        }
+        
+        /* Easter Egg Ripple */
+        #easter-egg {
             position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
+            top: 50%;
+            left: 50%;
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
         }
-        nav .nav-link.active, nav .nav-link:hover {
-            color: var(--primary-color);
-        }
-        nav .nav-link.active::after, nav .nav-link:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-        .page {
-            display: none; /* Pages are hidden by default */
-        }
-        .page.active {
-            display: block; /* Active page is shown */
+        .name-container:hover #easter-egg {
+             animation: ripple 0.8s ease-out;
         }
 
-        /* Dashboard specific styles */
-        .risk-bar-container {
-            display: flex;
-            height: 1.5rem;
-            border-radius: 0.25rem;
+        @keyframes ripple {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 124, 240, 0.6),
+                            0 0 0 0 rgba(0, 124, 240, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 0 40px rgba(0, 124, 240, 0),
+                            0 0 0 60px rgba(0, 124, 240, 0);
+            }
+        }
+        
+        /* Auto-playing ticker */
+        .ticker-wrap {
+            width: 100%;
             overflow: hidden;
-            background-color: #374151;
+            background: #0A0A0A;
         }
-        .risk-bar-segment {
-            height: 100%;
-            transition: width 0.5s ease-in-out;
+
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: ticker-animation 30s linear infinite;
         }
-        .tech-logo-card {
-            transition: transform 0.3s, box-shadow 0.3s;
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.7);
         }
-        .tech-logo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 0 15px var(--primary-glow-soft);
-        }
-        /* CyberGuardian specific styles */
-        .lang-btn.active {
-            background-color: var(--primary-color);
-            color: black;
+        
+        @keyframes ticker-animation {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
         }
     </style>
 </head>
-<body class="antialiased">
-    <!-- Header with Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-black/50 backdrop-blur-md p-4 z-50 border-b border-gray-800">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" id="home-link" class="text-2xl font-bold cyber-glow">Cyberstylometry</a>
-            <div class="hidden md:flex space-x-8 text-lg">
-                <a href="#dashboard" class="nav-link">Dashboard</a>
-                <a href="#technology" class="nav-link">Technology</a>
-                <a href="#metrics" class="nav-link">Metrics</a>
-                <a href="#benefits" class="nav-link">Benefits</a>
-                <a href="#cyberguardian" class="nav-link">CyberGuardian</a>
+<body class="overscroll-none">
+
+    <!-- OPENING SCREEN -->
+    <section id="hero" class="panel flex-col text-center">
+        <div class="name-container">
+            <h1 id="name" class="font-display text-5xl md:text-8xl font-bold tracking-[0.2em] uppercase shimmer">
+                <!-- Name will be injected by JS -->
+            </h1>
+            <div id="easter-egg"></div>
+        </div>
+        <p id="subtitle" class="text-lg md:text-xl text-gray-400 mt-6 tracking-widest opacity-0">Strategist. Builder. Speaker. Researcher.</p>
+        <div id="hero-icons" class="flex justify-center space-x-8 mt-8 opacity-0">
+             <a href="mailto:nandinii.official111@gmail.com" title="Email" class="text-gray-400 hover:text-white transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+             </a>
+             <a href="https://www.linkedin.com" target="_blank" title="LinkedIn" class="text-gray-400 hover:text-white transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+             </a>
+             <a href="https://github.com" target="_blank" title="GitHub" class="text-gray-400 hover:text-white transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+             </a>
+        </div>
+        <div id="scroll-indicator" class="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0">
+            <div class="w-[2px] h-16 bg-gray-600">
+                <div class="w-full h-4 bg-white animate-pulse"></div>
             </div>
         </div>
-    </nav>
+    </section>
 
-    <main>
-        <!-- Home Page -->
-        <section id="home" class="page active">
-            <header class="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden">
-                <canvas id="hero-canvas" class="hero-canvas"></canvas>
-                <div class="relative z-10 p-4">
-                    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-wider cyber-glow">
-                        Giving Firewalls a Brain
-                    </h1>
-                    <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-                        Proactively predicts phishing, fraud, and scams — explainable, regional, cross-device. From reacting to predicting.
+    <!-- ABOUT SECTION -->
+    <section id="about" class="panel">
+        <div class="container mx-auto px-6 md:px-10 max-w-5xl">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-center">
+                <div class="md:col-span-2">
+                    <div class="w-full aspect-square rounded-2xl overflow-hidden">
+                        <!-- Placeholder for a cinematic photo -->
+                        <img id="about-photo" src="https://placehold.co/600x600/0a0a0a/eaeaea?text=Nandinee" alt="Nandinee" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="md:col-span-3">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold about-anim">I build intelligent <br class="hidden md:block">systems and <span class="accent-blue">stories that scale.</span></h2>
+                    <p class="mt-6 text-lg text-gray-300 about-anim">
+                        A Computer Science student specializing in Software Engineering and Machine Learning. I have experience across the full product development cycle, from building resilient backend systems with Apache Kafka to deploying automated ML solutions.
                     </p>
-                    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-                        <div class="bg-gray-900/50 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-6">
-                            <p class="text-sm text-emerald-400 uppercase tracking-widest">Threats Predicted Today</p>
-                            <p id="threats-counter" class="text-5xl font-bold text-white mt-2">1,402,301</p>
-                        </div>
-                        <div class="bg-gray-900/50 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-6">
-                            <p class="text-sm text-emerald-400 uppercase tracking-widest">Users Protected</p>
-                            <p id="users-counter" class="text-5xl font-bold text-white mt-2">8,923,104</p>
-                        </div>
-                    </div>
-                    <div class="mt-10">
-                        <button id="view-demo-btn" class="bg-emerald-500 text-black font-bold py-3 px-8 rounded-lg text-lg hover:bg-emerald-400 transition-all duration-300 transform hover:scale-105">
-                            View Live Demo
-                        </button>
-                    </div>
-                </div>
-            </header>
-        </section>
-
-        <!-- Dashboard Page -->
-        <section id="dashboard" class="page py-24 pt-32 min-h-screen">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title text-center mb-16">The Security Cockpit</h2>
-                <div class="bg-black/30 border border-gray-700 rounded-2xl p-4 md:p-8 max-w-7xl mx-auto shadow-2xl shadow-blue-900/20">
-                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                        <!-- Left Column -->
-                        <div class="lg:col-span-2 space-y-6">
-                            <div class="bg-gray-900 rounded-lg p-4">
-                                <h4 class="font-bold text-lg mb-3 text-blue-300">Live Threat Feed</h4>
-                                <div id="threat-feed" class="space-y-3 h-64 overflow-y-auto pr-2">
-                                    <!-- Threats will be injected here by JS -->
-                                </div>
-                            </div>
-                            <div class="bg-gray-900 rounded-lg p-4">
-                                <h4 class="font-bold text-lg mb-3 text-blue-300">Risk Composition</h4>
-                                <div class="space-y-4">
-                                    <div>
-                                        <label class="text-sm text-gray-300">Stylometry</label>
-                                        <div class="risk-bar-container"><div class="risk-bar-segment bg-purple-500" style="width: 95%;"></div></div>
-                                    </div>
-                                    <div>
-                                        <label class="text-sm text-gray-300">URL Risk</label>
-                                        <div class="risk-bar-container"><div class="risk-bar-segment bg-blue-500" style="width: 50%;"></div><div class="risk-bar-segment bg-green-500" style="width: 20%;"></div><div class="risk-bar-segment bg-orange-500" style="width: 15%;"></div></div>
-                                    </div>
-                                    <div>
-                                        <label class="text-sm text-gray-300">Sender Rep</label>
-                                        <div class="risk-bar-container"><div class="risk-bar-segment bg-teal-500" style="width: 15%;"></div><div class="risk-bar-segment bg-yellow-500" style="width: 85%;"></div></div>
-                                    </div>
-                                    <div>
-                                        <label class="text-sm text-gray-300">Voice Cues</label>
-                                        <div class="risk-bar-container"><div class="risk-bar-segment bg-cyan-500" style="width: 100%;"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Right Column -->
-                        <div class="lg:col-span-3 space-y-6">
-                             <div class="bg-gray-900 rounded-lg p-4">
-                                 <h4 class="font-bold text-lg mb-3 text-blue-300">Cyberstylometry Risk Timeline</h4>
-                                 <div class="relative h-48 flex items-end p-2 pr-4 pl-8">
-                                    <span class="absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 text-sm text-gray-400 origin-center whitespace-nowrap">Risk Level</span>
-                                    <svg id="risk-timeline-svg" class="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
-                                        <path id="risk-path" d="M0,95 C 10,95 15,80 20,80 C 25,80 35,90 40,90 C 45,90 55,60 60,60 C 65,60 75,75 80,75 C 85,75 95,20 100,20 C 105,20 115,40 120,40 C 125,40 135,55 140,55 C 145,55 155,80 160,80 C 165,80 175,90 180,90 C 185,90 195,60 200,60 C 205,60 215,70 220,70 C 225,70 235,40 240,40 C 245,40 255,50 260,50 C 265,50 275,30 280,30 C 285,30 295,45 300,45" fill="none" stroke="var(--danger-color)" stroke-width="2"/>
-                                    </svg>
-                                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 text-sm text-gray-400">Time (Last 24 Hours)</span>
-                                 </div>
-                            </div>
-                            <div class="bg-gray-900 rounded-lg p-4">
-                                <h4 class="font-bold text-lg mb-3 text-blue-300">Evidence Panel</h4>
-                                <div class="bg-gray-800 p-4 rounded-md font-mono text-sm">
-                                    <p>&gt; LLM Rationale: High urgency language combined with non-standard URL detected.</p>
-                                    <p class="mt-2 text-gray-400">"URGENT your account is locked <span class="bg-red-500/30 text-red-300 rounded px-1">verify now</span> at <span class="bg-red-500/30 text-red-300 rounded px-1">http://bnk-verify-login.xyz</span> to avoid closure"</p>
-                                </div>
-                                <div class="mt-4 flex space-x-2">
-                                    <button id="quarantine-btn" class="bg-yellow-500 text-black text-sm font-bold py-2 px-4 rounded-lg hover:bg-yellow-400 transition-colors">Quarantine</button>
-                                    <button id="block-report-btn" class="bg-red-600 text-white text-sm font-bold py-2 px-4 rounded-lg hover:bg-red-500 transition-colors">Block & Report</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Technology Page -->
-        <section id="technology" class="page py-24 pt-32 min-h-screen">
-             <div class="container mx-auto px-6">
-                <h2 class="section-title text-center mb-16">Technology & Methodology</h2>
-                
-                <h3 class="text-3xl font-bold text-center mb-10 text-emerald-400">Core Technologies</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-6xl mx-auto mb-20">
-                    <!-- Tech Logos Here -->
-                    <div class="tech-logo-card bg-gray-900 p-6 rounded-lg flex flex-col items-center justify-center border border-gray-700">
-                        <img src="https://placehold.co/80x80/1f2937/e5e7eb?text=AI/ML" alt="AI/ML" class="h-16 mb-4"/>
-                        <p class="font-bold">AI / NLP</p><p class="text-sm text-gray-400">spaCy, HF</p>
-                    </div>
-                    <div class="tech-logo-card bg-gray-900 p-6 rounded-lg flex flex-col items-center justify-center border border-gray-700">
-                        <img src="https://placehold.co/80x80/1f2937/e5e7eb?text=Backend" alt="Backend" class="h-16 mb-4"/>
-                        <p class="font-bold">Backend</p><p class="text-sm text-gray-400">Spring Boot</p>
-                    </div>
-                    <div class="tech-logo-card bg-gray-900 p-6 rounded-lg flex flex-col items-center justify-center border border-gray-700">
-                        <img src="https://placehold.co/80x80/1f2937/e5e7eb?text=Streaming" alt="Streaming" class="h-16 mb-4"/>
-                        <p class="font-bold">Streaming</p><p class="text-sm text-gray-400">Apache Kafka</p>
-                    </div>
-                    <div class="tech-logo-card bg-gray-900 p-6 rounded-lg flex flex-col items-center justify-center border border-gray-700">
-                        <img src="https://placehold.co/80x80/1f2937/e5e7eb?text=Frontend" alt="Frontend" class="h-16 mb-4"/>
-                        <p class="font-bold">Frontend</p><p class="text-sm text-gray-400">React, GSAP</p>
-                    </div>
-                    <div class="tech-logo-card bg-gray-900 p-6 rounded-lg flex flex-col items-center justify-center border border-gray-700">
-                         <img src="https://placehold.co/80x80/1f2937/e5e7eb?text=Chain" alt="Blockchain" class="h-16 mb-4"/>
-                        <p class="font-bold">Blockchain</p><p class="text-sm text-gray-400">Hyperledger</p>
-                    </div>
-                </div>
-
-                <h3 class="text-3xl font-bold text-center mb-10 text-emerald-400">Our Proactive Pipeline</h3>
-                 <div class="max-w-3xl mx-auto space-y-8">
-                     <!-- Workflow steps copied from home page for consistency, can be customized -->
-                     <div class="workflow-card relative bg-gray-900 p-8 rounded-xl border border-gray-700 z-10">
-                        <div class="absolute top-4 left-4 text-5xl font-black text-gray-700">01</div>
-                        <h3 class="text-2xl font-bold text-emerald-400">Ingest & Stream</h3>
-                        <p class="text-gray-400 mt-2">Emails, SMS, webhooks, and call recordings are streamed via Kafka topics for real-time processing.</p>
-                    </div>
-                    <div class="workflow-card relative bg-gray-900 p-8 rounded-xl border border-gray-700 z-10">
-                        <div class="absolute top-4 left-4 text-5xl font-black text-gray-700">02</div>
-                        <h3 class="text-2xl font-bold text-emerald-400">Stylometry & Signal Extraction</h3>
-                        <p class="text-gray-400 mt-2">We analyze n-grams, function words, punctuation cadence, URL hygiene, code style, and voice prosody to model the attacker's unique "DNA".</p>
-                    </div>
-                    <div class="workflow-card relative bg-gray-900 p-8 rounded-xl border border-gray-700 z-10">
-                        <div class="absolute top-4 left-4 text-5xl font-black text-gray-700">03</div>
-                        <h3 class="text-2xl font-bold text-emerald-400">Dynamic Risk Scoring</h3>
-                        <p class="text-gray-400 mt-2">A physics-inspired damped, driven model updates risk in real-time, considering new evidence while gracefully decaying old, irrelevant data.</p>
-                    </div>
-                 </div>
-            </div>
-        </section>
-
-        <!-- Metrics Page -->
-        <section id="metrics" class="page py-24 pt-32 min-h-screen">
-             <div class="container mx-auto px-6">
-                <h2 class="section-title text-center mb-16">KPI Dashboard & Outcomes</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-20">
-                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-700 text-center">
-                        <h3 class="text-lg font-semibold text-blue-300 uppercase tracking-wider">Risk Reduction</h3>
-                        <p id="kpi-risk-reduction" class="text-6xl font-bold text-white mt-2">0%</p>
-                    </div>
-                     <div class="bg-gray-900 p-6 rounded-lg border border-gray-700 text-center">
-                        <h3 class="text-lg font-semibold text-blue-300 uppercase tracking-wider">Alerts Today</h3>
-                        <p id="kpi-alerts" class="text-6xl font-bold text-white mt-2">0</p>
-                    </div>
-                     <div class="bg-gray-900 p-6 rounded-lg border border-gray-700 text-center">
-                        <h3 class="text-lg font-semibold text-blue-300 uppercase tracking-wider">False Positive %</h3>
-                        <p id="kpi-fp-rate" class="text-6xl font-bold text-white mt-2">0%</p>
-                    </div>
-                     <div class="bg-gray-900 p-6 rounded-lg border border-gray-700 text-center">
-                        <h3 class="text-lg font-semibold text-blue-300 uppercase tracking-wider">Languages Covered</h3>
-                        <p id="kpi-languages" class="text-6xl font-bold text-white mt-2">0</p>
-                    </div>
-                </div>
-                
-                <div class="mt-20 max-w-5xl mx-auto">
+    <!-- WORK SECTION -->
+    <section id="work" class="panel flex-col">
+        <div class="text-center mb-16">
+            <h2 class="font-display text-5xl md:text-6xl font-bold">Selected Work</h2>
+            <p class="text-lg text-gray-400 mt-2">Projects that delivered impact.</p>
+        </div>
+        <div class="container mx-auto px-6 md:px-10 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card glass-card p-6 flex flex-col justify-between group cursor-pointer" data-title="RISKON: Dynamic Credit Risk Assessment" data-description="Designed a time-series data pipeline and an interpretable 'glass-box' module (WoE) for transparent feature engineering. This project won 1st Prize at FinShield Hackathon 2025 and was the sole team invited to pitch at the Global FinTech Fest, demonstrating high market and business viability.">
                     <div>
-                        <h3 class="text-3xl font-bold text-center mb-10 text-emerald-400">Measurable Outcomes (OKRs)</h3>
-                        <ul class="space-y-4 bg-gray-900 p-8 rounded-lg border border-gray-700">
-                            <li class="flex items-start text-lg"><span class="text-emerald-400 font-bold text-2xl mr-4">✓</span> <span>Reduce successful phishing click-through by >50%.</span></li>
-                            <li class="flex items-start text-lg"><span class="text-emerald-400 font-bold text-2xl mr-4">✓</span> <span>Cut SME email fraud losses by >30% in 6 months.</span></li>
-                            <li class="flex items-start text-lg"><span class="text-emerald-400 font-bold text-2xl mr-4">✓</span> <span>Ensure 95% of alerts have human-readable explanations.</span></li>
-                            <li class="flex items-start text-lg"><span class="text-emerald-400 font-bold text-2xl mr-4">✓</span> <span>Maintain a false positive rate below 2% after tuning.</span></li>
-                        </ul>
+                        <span class="text-sm font-semibold accent-blue">FinTech</span>
+                        <h3 class="font-display text-2xl font-bold mt-2">RISKON Framework</h3>
+                        <p class="text-gray-400 mt-3">₹5,00,000 hackathon-winning fintech system for dynamic credit risk assessment.</p>
                     </div>
+                    <span class="mt-6 font-semibold text-white group-hover:accent-blue transition-colors duration-300">View Case Study →</span>
                 </div>
-             </div>
-        </section>
-
-        <!-- Benefits Page -->
-        <section id="benefits" class="page py-24 pt-32 min-h-screen">
-             <div class="container mx-auto px-6">
-                <h2 class="section-title text-center mb-16">Nationwide Digital Immunity</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="border border-gray-700 p-6 rounded-lg bg-gray-900">
-                        <h3 class="text-xl font-bold text-emerald-400">Social</h3>
-                        <p class="mt-2 text-gray-400">Protects grandparents, first-time smartphone users, and the most vulnerable with simple, explainable alerts in regional languages.</p>
+                <!-- Project 2 -->
+                <div class="project-card glass-card p-6 flex flex-col justify-between group cursor-pointer" data-title="Object Detection for Safety Gear Compliance" data-description="Developed a real-time object detection system using YOLOv8 to identify safety gear (helmets, vests) in industrial settings. Achieved 93.25% mAP@0.5 and 95.88% precision. Enhanced model accuracy by 25% through rigorous hyperparameter tuning and advanced data augmentation.">
+                    <div>
+                        <span class="text-sm font-semibold accent-blue">Computer Vision / ML</span>
+                        <h3 class="font-display text-2xl font-bold mt-2">Safety Gear Detection</h3>
+                        <p class="text-gray-400 mt-3">A real-time YOLOv8 system to enforce industrial safety compliance.</p>
                     </div>
-                    <div class="border border-gray-700 p-6 rounded-lg bg-gray-900">
-                        <h3 class="text-xl font-bold text-emerald-400">Economic</h3>
-                        <p class="mt-2 text-gray-400">Saves crores in fraud losses for individuals and MSMEs, preventing devastating financial setbacks and building business trust.</p>
-                    </div>
-                    <div class="border border-gray-700 p-6 rounded-lg bg-gray-900">
-                        <h3 class="text-xl font-bold text-emerald-400">National</h3>
-                        <p class="mt-2 text-gray-400">Boosts digital trust in UPI, ONDC, and e-Gov initiatives by creating a collective, self-improving cyber-defense shield.</p>
-                    </div>
-                    <div class="border border-gray-700 p-6 rounded-lg bg-gray-900">
-                        <h3 class="text-xl font-bold text-emerald-400">Technical</h3>
-                        <p class="mt-2 text-gray-400">India’s first stylometry + LLM + blockchain cyber-defense network, setting a new global standard for proactive security.</p>
-                    </div>
+                    <span class="mt-6 font-semibold text-white group-hover:accent-blue transition-colors duration-300">View Case Study →</span>
                 </div>
-                
-                <div class="mt-20 max-w-5xl mx-auto grid grid-cols-1 gap-8 items-center text-center">
-                     <h3 class="text-3xl font-bold text-blue-400">Protecting Every Layer of Digital India</h3>
-                    <div class="flex items-center justify-center p-8">
-                        <img src="https://placehold.co/400x400/111827/34d399?text=Citizen+%3E+MSMEs+%3E+Nation" alt="Protection Layers" class="rounded-full border-4 border-emerald-500/50">
+                <!-- Project 3 -->
+                <div class="project-card glass-card p-6 flex flex-col justify-between group cursor-pointer" data-title="Automated Certificate Generator" data-description="Built and deployed a Python-based virtual assistant using Streamlit that automated the creation and distribution of certificates for AWS Club events. This solution reduced manual effort for event organizers by over 95%, leading to a First Prize for innovation and practical application.">
+                    <div>
+                        <span class="text-sm font-semibold accent-blue">Automation / Python</span>
+                        <h3 class="font-display text-2xl font-bold mt-2">AWS Virtual Assistant</h3>
+                        <p class="text-gray-400 mt-3">Automated certificate generation, reducing manual effort by over 95%.</p>
                     </div>
-                </div>
-
-             </div>
-        </section>
-
-        <!-- CyberGuardian Page -->
-        <section id="cyberguardian" class="page py-24 pt-32 min-h-screen">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title text-center mb-8">CyberGuardian</h2>
-                <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-16">Your Personal Safety Assistant. Received a confusing message? Let us check it for you.</p>
-
-                <div class="max-w-3xl mx-auto bg-gray-900 border border-gray-700 rounded-lg p-8">
-                    <h3 class="text-2xl font-bold text-emerald-400 mb-4">1. Enter the suspicious message</h3>
-                    <textarea id="guardian-input" class="w-full h-32 bg-gray-800 border border-gray-600 rounded-lg p-4 text-lg" placeholder="Type or paste the message here..."></textarea>
-                    <div class="flex items-center space-x-4 mt-4">
-                        <button id="speak-demo-btn" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line></svg>
-                            <span>Speak (Demo)</span>
-                        </button>
-                        <p class="text-gray-400">or</p>
-                        <button id="analyze-btn" class="bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-2 px-4 rounded-lg">
-                           Analyze Message
-                        </button>
-                    </div>
-
-                    <div id="guardian-alert-box" class="mt-10 border-t border-gray-700 pt-8" style="display: none;">
-                        <h3 class="text-2xl font-bold text-red-500 mb-4">2. This is a Scam! Here's what it means:</h3>
-                        
-                        <div class="flex items-center space-x-2 mb-4">
-                            <span class="text-gray-400">Read in:</span>
-                            <button data-lang="en" class="lang-btn active bg-gray-700 text-white font-bold py-1 px-3 rounded-lg text-sm">English</button>
-                            <button data-lang="hi" class="lang-btn bg-gray-700 text-white font-bold py-1 px-3 rounded-lg text-sm">Hindi</button>
-                            <button data-lang="ta" class="lang-btn bg-gray-700 text-white font-bold py-1 px-3 rounded-lg text-sm">Tamil</button>
-                        </div>
-
-                        <div id="explanation-box" class="bg-gray-800 p-6 rounded-lg text-xl leading-relaxed">
-                            <p class="lang-text" data-lang="en">This message is trying to scare you. It is a trick. Real banks will never ask you to click a link like this in a text message. <strong>Do not click the link.</strong> It is not safe.</p>
-                            <p class="lang-text" data-lang="hi" style="display: none;">यह संदेश आपको डराने की कोशिश कर रहा है। यह एक चाल है। असली बैंक कभी भी आपको टेक्स्ट संदेश में इस तरह के लिंक पर क्लिक करने के लिए नहीं कहेंगे। <strong>लिंक पर क्लिक न करें।</strong> यह सुरक्षित नहीं है।</p>
-                            <p class="lang-text" data-lang="ta" style="display: none;">இந்தச் செய்தி உங்களைப் பயமுறுத்த முயற்சிக்கிறது. இது ஒரு தந்திரம். உண்மையான வங்கிகள் ஒருபோதும் குறுஞ்செய்தியில் இதுபோன்ற இணைப்பைக் கிளிக் செய்யச் சொல்லாது. <strong>இணைப்பைக் கிளிக் செய்ய வேண்டாம்.</strong> அது பாதுகாப்பானது அல்ல.</p>
-                        </div>
-                        
-                        <h3 class="text-2xl font-bold text-emerald-400 mt-8 mb-4">3. What should you do now?</h3>
-                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                             <button id="cg-quarantine-btn" class="bg-yellow-500 text-black text-lg w-full font-bold py-3 px-6 rounded-lg hover:bg-yellow-400 transition-colors">Safe Guard My Phone</button>
-                             <button id="cg-block-report-btn" class="bg-red-600 text-white text-lg w-full font-bold py-3 px-6 rounded-lg hover:bg-red-500 transition-colors">Report to Cyber Crime Portal</button>
-                        </div>
-                    </div>
+                    <span class="mt-6 font-semibold text-white group-hover:accent-blue transition-colors duration-300">View Case Study →</span>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="panel flex-col">
+        <div class="text-center mb-16">
+            <h2 class="font-display text-5xl md:text-6xl font-bold">Experience</h2>
+            <p class="text-lg text-gray-400 mt-2">A timeline of my professional journey.</p>
+        </div>
+        <div class="container mx-auto px-6 md:px-10 max-w-4xl w-full">
+            <div id="timeline" class="relative">
+                <div class="timeline-line">
+                    <div class="timeline-line-progress"></div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="timeline-node" id="node-0"></div>
+                    <div class="timeline-node" id="node-1"></div>
+                </div>
+            </div>
+            <div id="experience-cards" class="mt-12">
+                 <!-- Experience content will be dynamically updated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- AWARDS & RECOGNITION TICKER -->
+    <section id="recognition" class="panel flex-col py-12">
+        <div class="text-center mb-8">
+             <h2 class="font-display text-5xl md:text-6xl font-bold">Leadership & Awards</h2>
+        </div>
+        <div class="ticker-wrap mt-8">
+            <div class="ticker">
+                <div class="ticker-item">🏆 1st Prize Winner, FinShield Hackathon 2025 (IIT Hyderabad x Bank of India)</div>
+                <div class="ticker-item">🏅 Certificate of Outstanding Performance - Research Internship</div>
+                <div class="ticker-item">🏆 1st Prize, AWS Club IGDTUW Hackathon</div>
+                <div class="ticker-item">🗣️ Director of Public Relations, Rotaract Club</div>
+                <div class="ticker-item">🎓 2X Academic Excellence Award Winner</div>
+                <div class="ticker-item">🥊 Silver Medal, Muay Thai District Level Championship</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="panel flex-col text-center">
+        <h2 id="contact-line" class="font-display text-4xl md:text-7xl font-bold max-w-4xl">Let's build what doesn't exist yet.</h2>
+        <div id="contact-links" class="mt-12 opacity-0">
+            <a href="mailto:nandinii.official111@gmail.com" class="text-lg md:text-2xl text-gray-300 hover:accent-blue transition-colors duration-300">nandinii.official111@gmail.com</a>
+            <div class="flex justify-center space-x-8 mt-8">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">LinkedIn</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">GitHub</a>
+            </div>
+        </div>
+    </section>
     
-    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-3"></div>
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden items-center justify-center p-4">
+        <div id="modal-content" class="glass-card p-8 md:p-12 max-w-3xl w-full relative transform scale-95 opacity-0">
+             <button id="close-modal" class="absolute top-4 right-4 text-white text-2xl">&times;</button>
+             <h2 id="modal-title" class="font-display text-4xl font-bold accent-blue"></h2>
+             <p id="modal-description" class="mt-6 text-lg text-gray-300"></p>
+        </div>
+    </div>
 
-    <footer class="text-center py-8 bg-black border-t border-gray-800">
-        <p class="text-gray-500">&copy; 2025 Cyberstylometry. All rights reserved.</p>
-    </footer>
 
+    <!-- GSAP and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        gsap.config({ nullTargetWarn: false });
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- SMOOTH SCROLLING SETUP (LENIS) ---
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
 
-        const pages = document.querySelectorAll('.page');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const homeLink = document.getElementById('home-link');
+            lenis.on('scroll', ScrollTrigger.update);
 
-        function showPage(pageId) {
-            // Add a fade out animation
-            gsap.to(pages, { 
-                duration: 0.2, 
-                opacity: 0, 
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+            
+            // --- HERO SECTION ANIMATION ---
+            const nameEl = document.getElementById('name');
+            const name = "NANDINEE";
+            name.split('').forEach(char => {
+                const span = document.createElement('span');
+                span.className = 'char inline-block';
+                span.textContent = char;
+                nameEl.appendChild(span);
+            });
+            
+            const heroTl = gsap.timeline();
+            heroTl.from('.char', {
+                y: 100,
+                opacity: 0,
+                stagger: 0.1,
+                ease: 'power4.out',
+                duration: 1.5
+            })
+            .to('#subtitle', { opacity: 1, duration: 1, ease: 'power2.inOut' }, "-=0.8")
+            .to(['#hero-icons', '#scroll-indicator'], { opacity: 1, duration: 1, ease: 'power2.inOut' }, "-=0.5");
+
+            // --- SECTION PINNING & ANIMATIONS ---
+            gsap.registerPlugin(ScrollTrigger);
+
+            const sections = gsap.utils.toArray('section');
+            sections.forEach((section, i) => {
+                if (i > 0) { // Don't pin the hero section
+                    ScrollTrigger.create({
+                        trigger: section,
+                        start: 'top top',
+                        pin: true,
+                        pinSpacing: false,
+                        scrub: 1,
+                    });
+                }
+            });
+
+            // About Section Animation
+            gsap.from(".about-anim", {
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "top 80%",
+                    end: "bottom bottom",
+                    toggleActions: "play none none reverse",
+                },
+                opacity: 0,
+                y: 50,
+                stagger: 0.2,
+                duration: 1,
+                ease: 'power3.out'
+            });
+
+             gsap.from("#about-photo", {
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "top 80%",
+                    end: "bottom bottom",
+                },
+                scale: 0.8,
+                opacity: 0,
+                duration: 1.5,
+                ease: 'power3.out'
+            });
+
+
+            // Work Section Animation
+            gsap.from(".project-card", {
+                scrollTrigger: {
+                    trigger: "#work",
+                    start: "top 70%",
+                    end: "center center",
+                    toggleActions: "play none none reverse",
+                },
+                opacity: 0,
+                y: 100,
+                stagger: 0.2,
+                duration: 1,
+                ease: 'power3.out'
+            });
+            
+            // Experience Section Animation & Logic
+            const experiences = [
+                {
+                    company: 'Deutsche Telekom Digital Labs',
+                    role: 'Software Engineering Intern',
+                    period: 'May 2025 - Jul 2025',
+                    description: 'Implemented robust, event-driven workflows and asynchronous messaging pipelines using Apache Kafka, prioritizing system quality and resilience. Executed comprehensive API validation and acceptance testing using Postman.'
+                },
+                {
+                    company: 'ACM IGDTUW',
+                    role: 'Research Intern',
+                    period: 'Sep 2024 - Apr 2025',
+                    description: 'Spearheaded an end-to-end Natural Language Processing research project, independently developing the core sentiment and semantic analysis models. Awarded a Certificate of Outstanding Performance.'
+                }
+            ];
+            const expContainer = document.getElementById('experience-cards');
+            let activeNode = 0;
+
+            function updateExperience(index) {
+                const exp = experiences[index];
+                expContainer.innerHTML = `
+                    <div class="experience-content text-center">
+                        <h3 class="font-display text-3xl font-bold">${exp.role} @ <span class="accent-blue">${exp.company}</span></h3>
+                        <p class="text-gray-400 mt-2">${exp.period}</p>
+                        <p class="mt-4 max-w-2xl mx-auto text-lg">${exp.description}</p>
+                    </div>
+                `;
+                gsap.from(".experience-content", {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.6,
+                    ease: 'power2.out'
+                });
+
+                document.querySelectorAll('.timeline-node').forEach((node, i) => {
+                    node.classList.toggle('active', i === index);
+                });
+                activeNode = index;
+            }
+
+            updateExperience(0);
+
+            gsap.to(".timeline-line-progress", {
+                scrollTrigger: {
+                    trigger: "#experience",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: true,
+                    onUpdate: (self) => {
+                        const newIndex = Math.round(self.progress * (experiences.length - 1));
+                        if(newIndex !== activeNode) {
+                            updateExperience(newIndex);
+                        }
+                    }
+                },
+                width: "100%"
+            });
+
+
+            // Contact Section Text Animation
+            const contactText = new SplitType('#contact-line', { types: 'words' });
+            gsap.from(contactText.words, {
+                scrollTrigger: {
+                    trigger: "#contact",
+                    start: "top 60%",
+                    end: "bottom bottom",
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 0,
+                y: 50,
+                stagger: 0.05,
+                duration: 1,
+                ease: 'power3.out',
                 onComplete: () => {
-                    pages.forEach(page => {
-                        page.classList.remove('active');
-                        page.style.opacity = 1; // Reset opacity
-                    });
-                    
-                    const targetPage = document.getElementById(pageId);
-                    if (targetPage) {
-                        targetPage.classList.add('active');
-                        gsap.fromTo(targetPage, {opacity: 0, y: 20}, {duration: 0.4, opacity: 1, y: 0, ease: 'power2.out'});
-                        
-                        // Re-trigger page-specific animations
-                        if(pageId === 'dashboard') initDashboardAnims();
-                        if(pageId === 'home') initHomeAnims();
-                        if(pageId === 'metrics') initMetricsAnims();
-                        if(pageId === 'cyberguardian') initGuardianAnims();
-                    }
+                    gsap.to('#contact-links', { opacity: 1, duration: 1 });
                 }
             });
 
-            navLinks.forEach(link => {
-                // Handle external links gracefully
-                if (link.target === '_blank') return;
-                
-                if (link.getAttribute('href') === `#${pageId}`) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
 
-        navLinks.forEach(link => {
-            // Prevent default only for internal links
-            if (link.target !== '_blank') {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const pageId = e.target.getAttribute('href').substring(1);
-                    showPage(pageId);
+            // --- PROJECT MODAL LOGIC ---
+            const modal = document.getElementById('project-modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const closeModalBtn = document.getElementById('close-modal');
+
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    modalTitle.textContent = card.dataset.title;
+                    modalDescription.textContent = card.dataset.description;
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    gsap.to(modalContent, { scale: 1, opacity: 1, duration: 0.4, ease: 'power3.out' });
                 });
+            });
+
+            function closeModal() {
+                 gsap.to(modalContent, { scale: 0.95, opacity: 0, duration: 0.3, ease: 'power3.in', onComplete: () => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }});
             }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // --- Ticker Animation ---
+            // Clone ticker items to create a seamless loop
+            const ticker = document.querySelector('.ticker');
+            const tickerItems = Array.from(ticker.children);
+            tickerItems.forEach(item => {
+                const clone = item.cloneNode(true);
+                ticker.appendChild(clone);
+            });
+
         });
 
-        homeLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage('home');
-        });
-        
-        // --- Toast Notification ---
-        function showToast(message, type = 'success') {
-            const toastContainer = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            const bgColor = type === 'success' ? 'bg-emerald-500' : (type === 'info' ? 'bg-blue-500' : 'bg-yellow-500');
-
-            toast.className = `p-4 rounded-lg text-white font-semibold shadow-lg ${bgColor}`;
-            toast.textContent = message;
-            
-            toastContainer.appendChild(toast);
-            
-            gsap.fromTo(toast, 
-                { opacity: 0, y: 20, scale: 0.9 },
-                { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power2.out' }
-            );
-
-            gsap.to(toast, { 
-                opacity: 0, 
-                y: 20, 
-                scale: 0.9, 
-                duration: 0.5, 
-                ease: 'power2.in', 
-                delay: 3,
-                onComplete: () => toast.remove()
-            });
-        }
-
-        // --- Page Specific Animations ---
-        function initHomeAnims() {
-            // --- Hero Canvas Animation ---
-            const canvas = document.getElementById('hero-canvas');
-            if (!canvas || canvas.dataset.initialized) return;
-            canvas.dataset.initialized = true;
-
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-
-            const sphere = {
-                x: canvas.width / 2,
-                y: canvas.height / 2,
-                radius: Math.min(canvas.width, canvas.height) / 10,
-            };
-
-            class Particle {
-                constructor() { this.reset(); }
-                reset() {
-                    const angle = Math.random() * Math.PI * 2;
-                    const radius = Math.max(canvas.width, canvas.height) / 2 + 50;
-                    this.x = canvas.width / 2 + radius * Math.cos(angle);
-                    this.y = canvas.height / 2 + radius * Math.sin(angle);
-                    this.radius = Math.random() * 3 + 1;
-                    this.color = 'var(--danger-color)';
-                    this.status = 'approaching';
-                    const targetX = sphere.x + (Math.random() - 0.5) * sphere.radius * 1.5;
-                    const targetY = sphere.y + (Math.random() - 0.5) * sphere.radius * 1.5;
-                    const dx = targetX - this.x, dy = targetY - this.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    const speed = Math.random() * 0.5 + 0.25;
-                    this.vx = (dx / dist) * speed;
-                    this.vy = (dy / dist) * speed;
-                }
-                update() {
-                    this.x += this.vx; this.y += this.vy;
-                    const dx = this.x - sphere.x, dy = this.y - sphere.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < sphere.radius && this.status === 'approaching') {
-                        this.status = 'intercepted';
-                        this.color = 'var(--primary-color)';
-                    }
-                    if (this.status === 'intercepted') {
-                        this.radius -= 0.05;
-                        if (this.radius <= 0) this.reset();
-                    }
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
-                    ctx.fill();
-                }
-            }
-            const particleCount = Math.floor((canvas.width * canvas.height) / 10000);
-            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
-            
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                const gradient = ctx.createRadialGradient(sphere.x, sphere.y, sphere.radius * 0.5, sphere.x, sphere.y, sphere.radius);
-                gradient.addColorStop(0, 'rgba(52, 211, 153, 0.5)');
-                gradient.addColorStop(1, 'rgba(52, 211, 153, 0)');
-                ctx.beginPath();
-                ctx.arc(sphere.x, sphere.y, sphere.radius, 0, Math.PI * 2);
-                ctx.fillStyle = gradient; ctx.fill();
-                ctx.beginPath();
-                ctx.arc(sphere.x, sphere.y, sphere.radius, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(52, 211, 153, 0.8)';
-                ctx.lineWidth = 1.5; ctx.stroke();
-                particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
-            }
-            animate();
-
-            function animateCounter(id, start, end, duration) {
-                let obj = { val: start };
-                gsap.to(obj, {
-                    val: end, duration: duration, ease: "power1.inOut",
-                    onUpdate: () => { document.getElementById(id).textContent = Math.floor(obj.val).toLocaleString('en-US'); }
-                });
-            }
-            animateCounter("threats-counter", 1300000, 1402301, 3);
-            animateCounter("users-counter", 8800000, 8923104, 3);
-            
-            const viewDemoBtn = document.getElementById('view-demo-btn');
-            if (viewDemoBtn && !viewDemoBtn.dataset.initialized) {
-                viewDemoBtn.dataset.initialized = true;
-                viewDemoBtn.addEventListener('click', () => showPage('dashboard'));
-            }
-        }
-
-        function initDashboardAnims() {
-            // Animate Risk Timeline
-            const path = document.getElementById("risk-path");
-            if(path){
-                const length = path.getTotalLength();
-                gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
-                gsap.to(path, { strokeDashoffset: 0, duration: 2, ease: "power1.inOut" });
-            }
-
-            // Animate Risk bars
-            const riskBars = document.querySelectorAll('.risk-bar-segment');
-            riskBars.forEach(bar => {
-                const width = bar.style.width;
-                gsap.fromTo(bar, { width: '0%' }, { width: width, duration: 1, ease: 'power2.out', delay: 0.5 });
-            });
-            
-            // Populate and animate threat feed
-            const threatFeed = document.getElementById('threat-feed');
-            if(threatFeed && !threatFeed.dataset.initialized) {
-                threatFeed.dataset.initialized = true;
-                const threats = [
-                    { type: 'SMS', msg: 'URGENT - Verify Your UPI', severity: 'Critical', color: 'red' },
-                    { type: 'EMAIL', msg: 'Invoice #INV-2025 Overdue', severity: 'High', color: 'yellow' },
-                    { type: 'VOICE', msg: 'Tax Dept. - Final Warrant', severity: 'Critical', color: 'red' },
-                    { type: 'CODE', msg: 'Unusual API call detected in commit', severity: 'Medium', color: 'orange' },
-                    { type: 'SMS', msg: 'Your package is delayed, click here', severity: 'High', color: 'yellow' },
-                ];
-                threatFeed.innerHTML = '';
-                threats.forEach((threat, i) => {
-                    const div = document.createElement('div');
-                    div.className = `bg-gray-800 p-3 rounded-md border-l-4 border-${threat.color}-500`;
-                    div.innerHTML = `<p class="font-semibold text-sm">${threat.type}: ${threat.msg}</p><p class="text-xs text-gray-400">Severity: ${threat.severity}</p>`;
-                    threatFeed.appendChild(div);
-                    gsap.from(div, { opacity: 0, x: -20, duration: 0.5, delay: i * 0.2 });
-                });
-            }
-
-            // Button functionality
-            const quarantineBtn = document.getElementById('quarantine-btn');
-            const blockReportBtn = document.getElementById('block-report-btn');
-            
-            if(quarantineBtn && !quarantineBtn.dataset.initialized) {
-                quarantineBtn.dataset.initialized = true;
-                quarantineBtn.addEventListener('click', () => {
-                    showToast('Threat quarantined successfully.', 'success');
-                    const firstThreat = threatFeed.querySelector('div');
-                    if(firstThreat) {
-                        gsap.to(firstThreat, { opacity: 0.5, x: 50, duration: 0.5 });
-                    }
-                });
-            }
-             if(blockReportBtn && !blockReportBtn.dataset.initialized) {
-                blockReportBtn.dataset.initialized = true;
-                blockReportBtn.addEventListener('click', () => {
-                    showToast('Sender blocked and reported to registry.', 'success');
-                    const firstThreat = threatFeed.querySelector('div');
-                    if(firstThreat) {
-                        gsap.to(firstThreat, { opacity: 0, x: 100, duration: 0.5, onComplete: () => firstThreat.remove() });
-                    }
-                });
-            }
-        }
-
-        function initMetricsAnims() {
-            function animateKPI(id, end, suffix = '') {
-                 let obj = { val: 0 };
-                 gsap.to(obj, {
-                    val: end,
-                    duration: 2,
-                    ease: "power2.out",
-                    onUpdate: () => {
-                        document.getElementById(id).textContent = Math.round(obj.val).toLocaleString('en-US') + suffix;
-                    }
-                });
-            }
-            animateKPI('kpi-risk-reduction', 42, '%');
-            animateKPI('kpi-alerts', 85);
-            animateKPI('kpi-fp-rate', 1.8, '%');
-            animateKPI('kpi-languages', 12);
-        }
-
-        function initGuardianAnims() {
-            const speakDemoBtn = document.getElementById('speak-demo-btn');
-            const analyzeBtn = document.getElementById('analyze-btn');
-            const guardianInput = document.getElementById('guardian-input');
-            const alertBox = document.getElementById('guardian-alert-box');
-            const langButtons = document.querySelectorAll('.lang-btn');
-            const langTexts = document.querySelectorAll('.lang-text');
-            const cgQuarantineBtn = document.getElementById('cg-quarantine-btn');
-            const cgBlockReportBtn = document.getElementById('cg-block-report-btn');
-
-            if (speakDemoBtn && !speakDemoBtn.dataset.initialized) {
-                speakDemoBtn.dataset.initialized = true;
-                speakDemoBtn.addEventListener('click', () => {
-                    guardianInput.value = "URGENT! Your bank account has been compromised. Click this link immediately to secure your account: http://secure-update-bank.info";
-                    showToast("Simulating voice input...", 'info');
-                });
-            }
-
-            if (analyzeBtn && !analyzeBtn.dataset.initialized) {
-                analyzeBtn.dataset.initialized = true;
-                analyzeBtn.addEventListener('click', () => {
-                    if (guardianInput.value.trim() !== '') {
-                        alertBox.style.display = 'block';
-                        gsap.from(alertBox, { opacity: 0, y: 20, duration: 0.5 });
-                    } else {
-                        showToast("Please enter a message to analyze.", 'warning');
-                    }
-                });
-            }
-            
-            langButtons.forEach(btn => {
-                if (!btn.dataset.initialized) {
-                    btn.dataset.initialized = true;
-                    btn.addEventListener('click', () => {
-                        const selectedLang = btn.dataset.lang;
-                        langButtons.forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        
-                        langTexts.forEach(text => {
-                            if (text.dataset.lang === selectedLang) {
-                                text.style.display = 'block';
-                            } else {
-                                text.style.display = 'none';
-                            }
-                        });
-                    });
-                }
-            });
-
-            if(cgQuarantineBtn && !cgQuarantineBtn.dataset.initialized) {
-                cgQuarantineBtn.dataset.initialized = true;
-                cgQuarantineBtn.addEventListener('click', () => showToast('Message has been moved to a safe folder.', 'success'));
-            }
-            if(cgBlockReportBtn && !cgBlockReportBtn.dataset.initialized) {
-                cgBlockReportBtn.dataset.initialized = true;
-                cgBlockReportBtn.addEventListener('click', () => {
-                    window.open('https://cybercrime.gov.in/', '_blank');
-                    showToast('Redirecting to Cyber Crime Portal...', 'info');
-                });
-            }
-        }
-
-        // Initial load
-        showPage('home');
-    });
     </script>
 </body>
 </html>
+
 
